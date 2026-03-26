@@ -15,5 +15,5 @@ um_meio = frac(1,2)
 tres_quartos = frac(3,4)
 
 print(um_meio) #imprime '1 / 2'
-print(um_meio + tres_quartos) #imprime '5 / 4', já simplificadp
+print(um_meio + tres_quartos) #imprime '5 / 4', já simplificado
 ```
