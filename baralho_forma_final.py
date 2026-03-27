@@ -31,12 +31,14 @@ def mostrar_regras():
     input("Pressione Enter para começar o jogo...")
 
 class Jogador:
+    """Classe composta pelo nome/número do jogador e a sua pontuação"""
     def __init__(self, x):
         self.nome = x + 1
         self.pontuacao = 0
 
     def __str__(self):
         return f"Jogador {self.nome}"
+        #Retorna o nome formatado
 
 class Carta:
     def __init__(self, valor, naipe):
@@ -63,6 +65,7 @@ class Baralho:
         return None
 
 def vinte_e_um():
+    """Controle do jogo propriamente dito(turnos e pontuação"""
     mostrar_regras()
     limpar_tela()
     baralho = Baralho()
@@ -71,7 +74,7 @@ def vinte_e_um():
     while True:
         try:
             jogadores_ativos = int(input("Quantos jogadores vão jogar? "))
-            if jogadores_ativos > 0: #Garanti o caso do usuário digitar um valor negativo
+            if jogadores_ativos > 0: #Garante o caso do usuário digitar um valor negativo
                 break #Vai quebrar o loop quando o usuário mandar um inteiro maior que zero
             else:
                 print("Por favor, digite um número maior que zero.\n")
@@ -118,7 +121,7 @@ def vinte_e_um():
             elif resp == "P":
                 print(f"Você decidiu parar com {jogadores[i].pontuacao} pontos.")
                 input("Pressione Enter para passar a vez...")
-                break
+                break #O jogador desiste de comprar cartas e espera a comparação final
                 
             else:
                 print("Opção inválida! Digite 'S' para pedir ou 'P' para passar.")
