@@ -33,7 +33,24 @@ print(um_meio + tres_quartos) #imprime '5 / 4', já simplificado
 [Ver código](baralho_forma_final.py) 
 
 ## Verificação de cpf
+Contém um script em Python desenvolvido para validar números de CPF (Cadastro de Pessoas Físicas) implementando o algoritmo oficial da Receita Federal para o cálculo dos dígitos verificadores.
 [Ver código](cpf.py)
+
+### Como funciona:
+O script está dividido em três funções:
+
+obter_digitos(): Solicita o CPF ao usuário, remove caracteres não numéricos e garante que a entrada contenha exatamente 11 dígitos.
+
+obter_resto(cpf, n): Realiza a lógica matemática de multiplicação ponderada para os n primeiros dígitos, retornando o resto da divisão por 11.
+
+validacao(cpf): A função principal que orquestra a validação, checando se o CPF não é uma sequência repetida e se os dígitos calculados batem com os informados.
+
+### Exemplo de uso:
+```Python
+Digite o seu CPF(11 dígitos): 123.456.789-00
+CPF inválido!
+```
+
 
 ## Cálculo de Imposto de Renda
 Consiste na implementação de um sistema para o cálculo progressivo de Imposto de Renda baseado em faixas salariais.
