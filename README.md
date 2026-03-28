@@ -1,4 +1,9 @@
-# questoes-estruturas-de-dados-2026
+# Estrutura de Dados - Trabalho 1 - Resolução de questões
+
+Grupo:
+- Demétrio Cardoso de Sousa
+- Guilherme Gomes da Silva
+- Guilherme Linhares de Andrade
 
 ## Frações
 No arquivo [fracc.py](fracc.py), encontra-se a implementação de um tipo operável para frações (frac).
