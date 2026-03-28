@@ -46,7 +46,7 @@ Uma implementação em Python do clássico jogo de cartas **Vinte e Um**.
 
 - Cálculo Automático de Vencedor: Compara as pontuações ao final, ignora quem "estourou" e anuncia o vencedor (ou empate).
 
-## Como funciona:
+### Como funciona:
 
 O projeto está estruturado em três classes principais:
 
