@@ -36,30 +36,27 @@ Uma implementação em Python do clássico jogo de cartas **Vinte e Um**.
 
 ### Funcionalidades
 
-    * Suporte Multiplayer: Permite definir o número de jogadores no início da partida.
+- Suporte Multiplayer: Permite definir o número de jogadores no início da partida.
 
-    * Interface Limpa: Utiliza limpeza de tela automática para manter o terminal organizado durante os turnos.
+- Interface Limpa: Utiliza limpeza de tela automática para manter o terminal organizado durante os turnos.
 
-    * Lógica de Baralho Realista: O baralho é embaralhado aleatoriamente e as cartas são removidas à medida que são compradas.
+- Lógica de Baralho Realista: O baralho é embaralhado aleatoriamente e as cartas são removidas à medida que são compradas.
 
-    * Tratamento de Erros: Validação de entradas para garantir que o número de jogadores e as ações (S/P) sejam válidos.
+- Tratamento de Erros: Validação de entradas para garantir que o número de jogadores e as ações (S/P) sejam válidos.
 
-    * Cálculo Automático de Vencedor: Compara as pontuações ao final, ignora quem "estourou" e anuncia o vencedor (ou empate).
+- Cálculo Automático de Vencedor: Compara as pontuações ao final, ignora quem "estourou" e anuncia o vencedor (ou empate).
 
 ## Como funciona:
 
 O projeto está estruturado em três classes principais:
 
-    * Carta: Define o valor e o naipe de cada carta individual.
+- Carta: Define o valor e o naipe de cada carta individual.
 
-    * Baralho: Responsável por gerar as 52 cartas, embaralhá-las e gerenciar a "compra" de cartas.
+- Baralho: Responsável por gerar as 52 cartas, embaralhá-las e gerenciar a "compra" de cartas.
 
-    * Jogador: Armazena o nome/número do jogador e sua pontuação acumulada.
+- Jogador: Armazena o nome/número do jogador e sua pontuação acumulada.
 
 Além disso, a função principal vinte_e_um() coordena o fluxo de turnos e as condições de vitória.
-
-
-
 
 
 ## Verificação de cpf
