@@ -30,10 +30,41 @@ print(um_meio + tres_quartos) #imprime '5 / 4', já simplificado
 ```
 
 ## Jogo de Cartas
+Uma implementação em Python do clássico jogo de cartas **Vinte e Um**.
+
 [Ver código](baralho_forma_final.py) 
+
+### Funcionalidades
+
+    * Suporte Multiplayer: Permite definir o número de jogadores no início da partida.
+
+    * Interface Limpa: Utiliza limpeza de tela automática para manter o terminal organizado durante os turnos.
+
+    * Lógica de Baralho Realista: O baralho é embaralhado aleatoriamente e as cartas são removidas à medida que são compradas.
+
+    * Tratamento de Erros: Validação de entradas para garantir que o número de jogadores e as ações (S/P) sejam válidos.
+
+    * Cálculo Automático de Vencedor: Compara as pontuações ao final, ignora quem "estourou" e anuncia o vencedor (ou empate).
+
+## Como funciona:
+
+O projeto está estruturado em três classes principais:
+
+    * Carta: Define o valor e o naipe de cada carta individual.
+
+    * Baralho: Responsável por gerar as 52 cartas, embaralhá-las e gerenciar a "compra" de cartas.
+
+    * Jogador: Armazena o nome/número do jogador e sua pontuação acumulada.
+
+Além disso, a função principal vinte_e_um() coordena o fluxo de turnos e as condições de vitória.
+
+
+
+
 
 ## Verificação de cpf
 Contém um script em Python desenvolvido para validar números de CPF (Cadastro de Pessoas Físicas) implementando o algoritmo oficial da Receita Federal para o cálculo dos dígitos verificadores.
+
 [Ver código](cpf.py)
 
 ### Como funciona:
