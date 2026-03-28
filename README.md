@@ -67,11 +67,11 @@ Contém um script em Python desenvolvido para validar números de CPF (Cadastro 
 ### Como funciona:
 O script está dividido em três funções:
 
-obter_digitos(): Solicita o CPF ao usuário, remove caracteres não numéricos e garante que a entrada contenha exatamente 11 dígitos.
+- obter_digitos(): Solicita o CPF ao usuário, remove caracteres não numéricos e garante que a entrada contenha exatamente 11 dígitos.
 
-obter_resto(cpf, n): Realiza a lógica matemática de multiplicação ponderada para os n primeiros dígitos, retornando o resto da divisão por 11.
+- obter_resto(cpf, n): Realiza a lógica matemática de multiplicação ponderada para os n primeiros dígitos, retornando o resto da divisão por 11.
 
-validacao(cpf): A função principal que orquestra a validação, checando se o CPF não é uma sequência repetida e se os dígitos calculados batem com os informados.
+- validacao(cpf): A função principal que orquestra a validação, checando se o CPF não é uma sequência repetida e se os dígitos calculados batem com os informados.
 
 ### Exemplo de uso:
 ```Python
