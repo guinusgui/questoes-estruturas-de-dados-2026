@@ -7,4 +7,7 @@ Grupo 3:
 
 Consiste na implemetnação de uma fila de pessoas em que pode haver indivíduos com prioridade, sendo eventualmente chamados antes
 
-A fila segue um procedimento `1com3sem`, isso é, a cada 1 pessoa com prioridade passando a frente, três sem devem ter passado
+**Características:**
+- Uso de Array: a implementação usa-a em detrimento da lista, evadindo parcialmente as limitações do tipo através de reguladores para início e fim e um método de redimensionamento
+- Política de Atendimento: No caso de haver prioridades, a fila permite que uma prioridade passe a frente a cada 3 não prioridades. As prioridades são indicadas por `*` no fim dos nomes
+- Capacidade de leitura de arquivo: o usuário pode optar pela leitura de um arquivo .txt como entrada em vez de adicionar cada entrada manualmente pela interfaçe
