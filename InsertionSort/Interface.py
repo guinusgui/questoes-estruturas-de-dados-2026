@@ -70,6 +70,8 @@ class Interface(ctk.CTk):
         novo_frame.pack(expand=True, fill="both")
 
     def carregar_os_dados(self, label: ctk.CTkLabel):
+        self.minha_lista=[]#Reseto a lista, para que não seja acumulado os dados
+        #já anteriomento colocados
         resposta = CarregarArquivos(self.minha_lista)
 
         if "sucesso" in resposta:
@@ -107,9 +109,14 @@ class Interface(ctk.CTk):
         txt_box = ctk.CTkTextbox(novo_frame, width=300, height=250)
         txt_box.pack(pady=10)
         
-        nomes = self.minha_lista.toList()
+        nomes = self.minha_lista.toList() #Método que transfarma em uma lista sem ser
+        #encadeada, senvindo apenas para facilitar na hora de exibir os nomes
         count = 1
-        for nome in nomes:
+        
+        for nome in reversed(nomes): #Inverte a lista, pois quando ela é inserida acaba
+        #invertendo a ordem que está no arquivo 
+            if count>= 20:
+                break
             txt_box.insert("end", f"{count}- {nome}\n")
             count +=1
         txt_box.configure(state="disabled")
@@ -131,7 +138,10 @@ class Interface(ctk.CTk):
         
         nomes_ordenados = self.resultado_ordenacao["sucesso"]["lista_nomes"]
         count = 1
+        
         for nome in nomes_ordenados:
+            if count>= 20:
+                break
             txt_box.insert("end", f"{count}- {nome}\n")
             count +=1
         txt_box.configure(state="disabled")
@@ -148,8 +158,8 @@ class Interface(ctk.CTk):
         novo_frame = ctk.CTkFrame(self, fg_color="transparent")
         ctk.CTkLabel(novo_frame, text="ESTATÍSTICAS DA ORDENAÇÃO", font=("Arial", 18, "bold")).pack(pady=20)
         
-        stats = self.resultado_ordenacao["sucesso"]["estatisticas"]
-        info = f"Quantidade de nomes: {stats['tamanho']}\n\nTempo de execução:\n{stats['tempo']:.6f} segundos"
+        status = self.resultado_ordenacao["sucesso"]["estatisticas"]
+        info = f"Quantidade de nomes: {status['tamanho']}\n\nTempo de execução:\n{status['tempo']:.6f} segundos"
         
         ctk.CTkLabel(novo_frame, text=info, font=("Arial", 14), justify="center").pack(pady=10)
         ctk.CTkButton(novo_frame, text="Voltar ao menu", command=lambda: self.voltar_para_menu(novo_frame)).pack(pady=20)
