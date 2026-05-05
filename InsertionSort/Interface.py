@@ -36,24 +36,27 @@ class Interface(ctk.CTk):
         # Botão 2: Ordenar os Dados 
         frame_2 = self.criar_frame_no_menu()
         ctk.CTkButton(frame_2, text="2. Ordenar Dados", 
-                      command=lambda: self.ordernar_os_dados(self.statos_2)).pack(pady=(5,0))
+                      command=lambda: self.ordenar_os_dados(self.statos_2)).pack(pady=(5,0))
         self.statos_2 = ctk.CTkLabel(frame_2, text="", text_color="gray")
         self.statos_2.pack()
         
         # Botão 3: Listar Original 
         
-        ctk.CTkButton(self.frame_menu, text="3. Listar sem Ordenação", 
-                      command=self.listar_sem_ordenacao).pack(pady=(10,20))
+        self.bnt_listar_sem_odernacao =  ctk.CTkButton(self.frame_menu, text="3. Listar sem Ordenação", 
+                      command=self.listar_sem_ordenacao)
+        self.bnt_listar_sem_odernacao.pack(pady=(10,20))
     
         # Botão 4: Listar Ordenado
         
-        ctk.CTkButton(self.frame_menu, text="4. Listar Ordenados", 
-                      command=self.listar_com_ordenacao).pack(pady=20)
+        self.bnt_listar_com_odernacao = ctk.CTkButton(self.frame_menu, text="4. Listar Ordenados", 
+                      command=self.listar_com_ordenacao)
+        self.bnt_listar_com_odernacao.pack(pady=20)
 
         # Botão 5: Estatísticas
         
-        ctk.CTkButton(self.frame_menu, text="5. Imprimir Estatísticas", 
-                      command=self.imprimir_estatistica).pack(pady=20)
+        self.bnt_estatistica = ctk.CTkButton(self.frame_menu, text="5. Imprimir Estatísticas", 
+                      command=self.imprimir_estatistica)
+        self.bnt_estatistica.pack(pady=20)
 
 
     def criar_frame_no_menu(self):
@@ -73,7 +76,15 @@ class Interface(ctk.CTk):
     def carregar_os_dados(self, label: ctk.CTkLabel):
         self.minha_lista = ListaSimples()#Reseto a lista, para que não seja acumulado os dados        
         #já anteriomento colocados
+        self.bnt_listar_com_odernacao.configure(state="disabled")
+        self.bnt_listar_sem_odernacao.configure(state="disabled")
+        self.bnt_estatistica.configure(state="disabled")
+
         resposta = CarregarArquivos(self.minha_lista)
+
+        self.bnt_listar_com_odernacao.configure(state="normal")
+        self.bnt_listar_sem_odernacao.configure(state="normal")
+        self.bnt_estatistica.configure(state="normal")
 
         if "sucesso" in resposta:
             self.foi_carregado = True
@@ -82,10 +93,12 @@ class Interface(ctk.CTk):
         else:
             label.configure(text=resposta["erro"], text_color="#ea3013")
 
+
+
         self.after(3000, lambda: label.configure(text=""))#Basicamente vai esperar 3000ms(3segundos) para fazer com que 
         #o "label" volte a ter nada escrito nele
 
-    def ordernar_os_dados(self, label: ctk.CTkLabel):
+    def ordenar_os_dados(self, label: ctk.CTkLabel):
         if not self.foi_carregado:
             label.configure(text="Erro: Carregue o arquivo primeiro!", text_color="#ea3013")
             self.after(3000, lambda: label.configure(text=""))
@@ -169,6 +182,7 @@ class Interface(ctk.CTk):
         
         ctk.CTkLabel(novo_frame, text=info, font=("Arial", 14), justify="center").pack(pady=10)
         ctk.CTkButton(novo_frame, text="Voltar ao menu", command=lambda: self.voltar_para_menu(novo_frame)).pack(pady=20)
+
         self.sair_do_menu(novo_frame)
 
 
