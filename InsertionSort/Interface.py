@@ -17,6 +17,7 @@ class Interface(ctk.CTk):
         self.resultado_ordenacao = None 
         self.foi_carregado = False
         self.foi_ordenado = False
+        self.processando = False
 
         
         self.criar_menu()
@@ -74,10 +75,15 @@ class Interface(ctk.CTk):
         novo_frame.pack(expand=True, fill="both")
 
     def carregar_os_dados(self, label: ctk.CTkLabel):
+        if self.processando:
+            return
+
         self.minha_lista = ListaSimples()#Reseto a lista, para que não seja acumulado os dados        
         #já anteriomento colocados
 
+        self.processando = True
         resposta = CarregarArquivos(self.minha_lista)
+        self.processando = False
 
         if "sucesso" in resposta:
             self.foi_carregado = True
@@ -92,22 +98,17 @@ class Interface(ctk.CTk):
         #o "label" volte a ter nada escrito nele
 
     def ordenar_os_dados(self, label: ctk.CTkLabel):
+        if self.processando:
+            return
+
         if not self.foi_carregado:
             label.configure(text="Erro: Carregue o arquivo primeiro!", text_color="#ea3013")
             self.after(3000, lambda: label.configure(text=""))
             return
         
-        # self.bnt_listar_com_odernacao.configure(state="disabled")
-        # self.bnt_listar_sem_odernacao.configure(state="disabled")
-        # self.bnt_estatistica.configure(state="disabled")
-        self.overlay = ctk.CTkFrame(self.frame_menu, fg_color="gray")
-        self.overlay.place(relx=0, rely=0, relwidth=1, relheight=1)
-        resposta = InsertionSort(self.minha_lista)
-        self.overlay.destroy()
 
-        # self.bnt_listar_com_odernacao.configure(state="normal")
-        # self.bnt_listar_sem_odernacao.configure(state="normal")
-        # self.bnt_estatistica.configure(state="normal")
+        resposta = InsertionSort(self.minha_lista)  
+       
 
         if "sucesso" in resposta:
             self.foi_ordenado = True
@@ -118,7 +119,9 @@ class Interface(ctk.CTk):
         self.after(3000, lambda: label.configure(text=""))
 
     def listar_sem_ordenacao(self):
-        
+        if self.processando:
+            return
+
         if not self.foi_carregado:
             self.statos_1.configure(text="⚠️ Carregue os dados primeiro!", text_color="#e67e22")
             self.after(3000, lambda: self.statos_1.configure(text=""))
@@ -147,6 +150,8 @@ class Interface(ctk.CTk):
         self.sair_do_menu(novo_frame) # Troca a tela para voltar ao menu
 
     def listar_com_ordenacao(self):
+        if self.processando:
+            return
         
         if not self.foi_ordenado:
             self.statos_2.configure(text="⚠️ Ordene os dados primeiro!", text_color="#e67e22")
@@ -173,6 +178,8 @@ class Interface(ctk.CTk):
         self.sair_do_menu(novo_frame)
 
     def imprimir_estatistica(self):
+        if self.processando:
+            return
         
         if not self.foi_ordenado:
             self.statos_2.configure(text="⚠️ Ordene os dados primeiro!", text_color="#e67e22")
