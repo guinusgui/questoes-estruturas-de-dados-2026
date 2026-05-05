@@ -127,19 +127,19 @@ class Interface(ctk.CTk):
         # 3. Função única que encapsula o trabalho e a atualização da GUI
         def fluxo_de_trabalho():
             # Executa o cálculo (pesado)
-            resultado = InsertionSort(self.minha_lista)
+            self.resultado_ordenacao = InsertionSort(self.minha_lista)
             
             # Volta para a Thread Principal para atualizar a interface (obrigatório)
             self.after(0, lambda: [
                 self.destravar_botoes(),
                 setattr(self, 'processando', False),
                 label.configure(
-                    text="Ordenação concluída!" if "sucesso" in resultado else resultado["erro"],
-                    text_color="#2ecc71" if "sucesso" in resultado else "#ea3013"
+                    text="Ordenação concluída!" if "sucesso" in self.resultado_ordenacao else self.resultado_ordenacao["erro"],
+                    text_color="#2ecc71" if "sucesso" in self.resultado_ordenacao else "#ea3013"
                 ),
                 self.after(3000, lambda: label.configure(text=""))
             ])
-    
+        self.foi_ordenado = True
         # 4. Inicia a thread disparando a função interna
         threading.Thread(target=fluxo_de_trabalho, daemon=True).start()
 
