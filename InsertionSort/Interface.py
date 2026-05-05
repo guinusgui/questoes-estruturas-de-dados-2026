@@ -41,18 +41,15 @@ class Interface(ctk.CTk):
         self.statos_2.pack()
         
         # Botão 3: Listar Original 
-        frame_3 = self.criar_frame_no_menu()
-        ctk.CTkButton(frame_3, text="3. Listar sem Ordenação", 
+        ctk.CTkButton(self.frame_menu, text="3. Listar sem Ordenação", 
                       command=self.listar_sem_ordenacao).pack(pady=10)
     
         # Botão 4: Listar Ordenado
-        frame_4 = self.criar_frame_no_menu()
-        ctk.CTkButton(frame_4, text="4. Listar Ordenados", 
+        ctk.CTkButton(self.frame_menu, text="4. Listar Ordenados", 
                       command=self.listar_com_ordenacao).pack(pady=10)
 
         # Botão 5: Estatísticas
-        frame_5 = self.criar_frame_no_menu()
-        ctk.CTkButton(frame_5, text="5. Imprimir Estatísticas", 
+        ctk.CTkButton(self.frame_menu, text="5. Imprimir Estatísticas", 
                       command=self.imprimir_estatistica).pack(pady=10)
 
 
@@ -88,6 +85,7 @@ class Interface(ctk.CTk):
     def ordernar_os_dados(self, label: ctk.CTkLabel):
         if not self.foi_carregado:
             label.configure(text="Erro: Carregue o arquivo primeiro!", text_color="#ea3013")
+            self.after(3000, lambda: label.configure(text=""))
             return
 
         resposta = InsertionSort(self.minha_lista)
@@ -103,6 +101,7 @@ class Interface(ctk.CTk):
         
         if not self.foi_carregado:
             self.statos_1.configure(text="⚠️ Carregue os dados primeiro!", text_color="#e67e22")
+            self.after(3000, lambda: self.statos_1.configure(text=""))
             return
 
         novo_frame = ctk.CTkFrame(self, fg_color="transparent")
@@ -131,6 +130,7 @@ class Interface(ctk.CTk):
         
         if not self.foi_ordenado:
             self.statos_2.configure(text="⚠️ Ordene os dados primeiro!", text_color="#e67e22")
+            self.after(3000, lambda: self.statos_2.configure(text=""))
             return
 
         novo_frame = ctk.CTkFrame(self, fg_color="transparent")
