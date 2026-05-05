@@ -115,7 +115,7 @@ class Interface(ctk.CTk):
         
         for nome in reversed(nomes): #Inverte a lista, pois quando ela é inserida acaba
         #invertendo a ordem que está no arquivo 
-            if count>= 20:
+            if count> 20:
                 break
             txt_box.insert("end", f"{count}- {nome}\n")
             count +=1
@@ -140,7 +140,7 @@ class Interface(ctk.CTk):
         count = 1
         
         for nome in nomes_ordenados:
-            if count>= 20:
+            if count> 20:
                 break
             txt_box.insert("end", f"{count}- {nome}\n")
             count +=1
