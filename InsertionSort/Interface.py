@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from codigo import ListaSimples,CarregarArquivos,InsertionSort
-
+import threading
 class Interface(ctk.CTk):
     def __init__(self):
         super().__init__()
@@ -114,33 +114,34 @@ class Interface(ctk.CTk):
         self.after(3000, lambda: label.configure(text=""))#Basicamente vai esperar 3000ms(3segundos) para fazer com que 
         #o "label" volte a ter nada escrito nele
 
-    def ordenar_os_dados(self, label: ctk.CTkLabel):
-        if self.processando:
-            return
 
-        if not self.foi_carregado:
-            label.configure(text="Erro: Carregue o arquivo primeiro!", text_color="#ea3013")
+def ordenar_os_dados(self, label: ctk.CTkLabel):
+    # 1. Bloqueio de entrada
+    if self.processando:
+        return
+
+    # 2. Configuração inicial
+    self.processando = True
+    self.travar_botoes()
+
+    # 3. Função única que encapsula o trabalho e a atualização da GUI
+    def fluxo_de_trabalho():
+        # Executa o cálculo (pesado)
+        resultado = InsertionSort(self.minha_lista)
+        
+        # Volta para a Thread Principal para atualizar a interface (obrigatório)
+        self.after(0, lambda: [
+            self.destravar_botoes(),
+            setattr(self, 'processando', False),
+            label.configure(
+                text="Ordenação concluída!" if "sucesso" in resultado else resultado["erro"],
+                text_color="#2ecc71" if "sucesso" in resultado else "#ea3013"
+            ),
             self.after(3000, lambda: label.configure(text=""))
-            return
+        ])
 
-        self.travar_botoes()
-        self.overlay = ctk.CTkFrame(self.frame_menu, fg_color="gray")
-        self.overlay.place(relx=0, rely=0, relwidth=1, relheight=1)
-
-        self.processando = True
-        resposta = InsertionSort(self.minha_lista)  
-       
-        self.overlay.destroy()
-        self.processando = False
-        self.destravar_botoes()
-
-        if "sucesso" in resposta:
-            self.foi_ordenado = True
-            self.resultado_ordenacao = resposta # Salva o dicionário de estatísticas
-            label.configure(text="Ordenação concluída!", text_color="#2ecc71")
-        else:
-            label.configure(text=resposta["erro"], text_color="#ea3013")
-        self.after(3000, lambda: label.configure(text=""))
+    # 4. Inicia a thread disparando a função interna
+    threading.Thread(target=fluxo_de_trabalho, daemon=True).start()
 
     def listar_sem_ordenacao(self):
         if self.processando:
