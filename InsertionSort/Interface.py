@@ -83,16 +83,17 @@ class Interface(ctk.CTk):
         self.frame_menu.pack_forget()
         novo_frame.pack(expand=True, fill="both")
 
-    def travar_botoes(self):
+    def travar_botoes(self): #É melhor explicado em "ordenar_os_dados"
             for botao in self.botoes:
                 botao.configure(state="disabled")
 
-    def destravar_botoes(self):
+    def destravar_botoes(self): #É melhor explicado em "ordenar_os_dados"
             for botao in self.botoes:
                 botao.configure(state="normal")
 
     def carregar_os_dados(self, label: ctk.CTkLabel):
-        if self.processando:
+        if self.processando: # Vai ser explicado melhor no método "ordenar_os_dados"
+            #esse variável de controle
             return
 
         self.minha_lista = ListaSimples()#Reseto a lista, para que não seja acumulado os dados        
@@ -116,22 +117,24 @@ class Interface(ctk.CTk):
 
     
     def ordenar_os_dados(self, label: ctk.CTkLabel):
-        # 1. Bloqueio de entrada
+        #Essa veriável vai indicar que a ação do "InsertionSort" está acontecendo e
+        #enquanto ela ocorrer, é para nenhum botão rode alguma ação nesse meio tempo
         if self.processando:
             return
     
-        # 2. Configuração inicial
         self.processando = True
-        self.travar_botoes()
-    
-        # 3. Função única que encapsula o trabalho e a atualização da GUI
+        self.travar_botoes()#Mudo o estado dos botões para que eles não se tornem 
+        #"clicavéis" no momento
+        
         def fluxo_de_trabalho():
-            # Executa o cálculo (pesado)
+            
             self.resultado_ordenacao = InsertionSort(self.minha_lista)
             
-            # Volta para a Thread Principal para atualizar a interface (obrigatório)
+            # Faz com que "Thread Principal" atualize a interface(faz com que
+            #os botões voltem a funcionar e que informe ao usuário que a ordenação
+            #ocorreu com sucesso)
             self.after(0, lambda: [
-                self.destravar_botoes(),
+                self.destravar_botoes(), 
                 setattr(self, 'processando', False),
                 label.configure(
                     text="Ordenação concluída!" if "sucesso" in self.resultado_ordenacao else self.resultado_ordenacao["erro"],
@@ -139,8 +142,10 @@ class Interface(ctk.CTk):
                 ),
                 self.after(3000, lambda: label.configure(text=""))
             ])
+
         self.foi_ordenado = True
-        # 4. Inicia a thread disparando a função interna
+        #Inicia uma thread auxiliar, na qual dispara a função interna. Enquanto isso
+        # a "Thread Main" fica respoável por manter "viva" a Interface
         threading.Thread(target=fluxo_de_trabalho, daemon=True).start()
 
     def listar_sem_ordenacao(self):
@@ -151,8 +156,6 @@ class Interface(ctk.CTk):
             self.statos_1.configure(text="⚠️ Carregue os dados primeiro!", text_color="#e67e22")
             self.after(3000, lambda: self.statos_1.configure(text=""))
             return
-
-        
 
         novo_frame = ctk.CTkFrame(self, fg_color="transparent")
         ctk.CTkLabel(novo_frame, text="DADOS ORIGINAIS(20 PRIMEIROS)", font=("Arial", 18, "bold")).pack(pady=10)
@@ -225,7 +228,7 @@ class Interface(ctk.CTk):
 
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":#
     app = Interface()
     app.mainloop()
     
