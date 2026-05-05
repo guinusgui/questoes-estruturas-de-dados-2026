@@ -6,7 +6,7 @@ class Interface(ctk.CTk):
         super().__init__()
 
         # Configurações do Sistema
-        ctk.set_appearance_mode("System")
+        ctk.set_appearance_mode("Dark")
         ctk.set_default_color_theme("blue")
 
         self.geometry("400x400")
@@ -61,8 +61,8 @@ class Interface(ctk.CTk):
         return frame
 
     def voltar_para_menu(self, frame_atual: ctk.CTkFrame):
-        frame_atual.pack_forget()
-        frame_atual.destroy() # Limpa a memória
+        frame_atual.pack_forget() #Escondo o Frame
+        frame_atual.destroy() # Limpo o frame da memória
         self.frame_menu.pack(expand=True, fill="both")
 
     def sair_do_menu(self, novo_frame: ctk.CTkFrame):
@@ -81,7 +81,8 @@ class Interface(ctk.CTk):
         else:
             label.configure(text=resposta["erro"], text_color="#ea3013")
 
-        self.after(3000, lambda: label.configure(text=""))
+        self.after(3000, lambda: label.configure(text=""))#Basicamente vai esperar 3000ms(3segundos) para fazer com que 
+        #o "label" volte a ter nada escrito nele
 
     def ordernar_os_dados(self, label: ctk.CTkLabel):
         if not self.foi_carregado:
