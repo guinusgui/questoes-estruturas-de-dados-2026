@@ -106,9 +106,12 @@ class Interface(ctk.CTk):
             self.after(3000, lambda: label.configure(text=""))
             return
         
+        self.overlay = ctk.CTkFrame(self.frame_menu, fg_color="gray")
+        self.overlay.place(relx=0, rely=0, relwidth=1, relheight=1)
 
         resposta = InsertionSort(self.minha_lista)  
        
+        self.overlay.destroy()
 
         if "sucesso" in resposta:
             self.foi_ordenado = True
