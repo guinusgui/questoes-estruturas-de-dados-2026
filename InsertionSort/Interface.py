@@ -41,16 +41,19 @@ class Interface(ctk.CTk):
         self.statos_2.pack()
         
         # Botão 3: Listar Original 
+        
         ctk.CTkButton(self.frame_menu, text="3. Listar sem Ordenação", 
-                      command=self.listar_sem_ordenacao).pack(pady=10)
+                      command=self.listar_sem_ordenacao).pack(pady=(10,20))
     
         # Botão 4: Listar Ordenado
+        
         ctk.CTkButton(self.frame_menu, text="4. Listar Ordenados", 
-                      command=self.listar_com_ordenacao).pack(pady=10)
+                      command=self.listar_com_ordenacao).pack(pady=20)
 
         # Botão 5: Estatísticas
+        
         ctk.CTkButton(self.frame_menu, text="5. Imprimir Estatísticas", 
-                      command=self.imprimir_estatistica).pack(pady=10)
+                      command=self.imprimir_estatistica).pack(pady=20)
 
 
     def criar_frame_no_menu(self):
