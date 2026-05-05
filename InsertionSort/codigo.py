@@ -6,7 +6,7 @@ class No:
         self.valor = valor
         self.next = None
 
-class ListaSimples:
+class ListaSimples: #lista encadeada padrão com um descritor
 
     def __init__(self):
         self.head = None
@@ -21,7 +21,9 @@ class ListaSimples:
         self.head = novo
         self.tamanho += 1
     
-    def toList(self): # para ficar mais fácil de imprimir
+    def toList(self): 
+        '''Converte a lista encadeada para uma lista padrão do Python.
+        Isso facilita a exibição de dados na Interface Gráfica (GUI).'''
         resultado = []
         aux = self.head
         while aux:
@@ -30,9 +32,11 @@ class ListaSimples:
         return resultado
 
 def InsertionSort(lista_original):
-    if lista_original.isEmpty():
+
+    if lista_original.isEmpty(): 
         return{"erro": "Os dados ainda não foram carregados ou estão vazios."}
-    inicio = time.time()
+
+    inicio = time.time() # Início da medição para estatísticas
 
     lista_ordenada = ListaSimples()
     atual = lista_original.head
@@ -44,13 +48,15 @@ def InsertionSort(lista_original):
         if lista_ordenada.head is None or novo_no.valor < lista_ordenada.head.valor: #caso especial: inserir no começo ou lista vazia
             novo_no.next = lista_ordenada.head
             lista_ordenada.head = novo_no
-        else:
+        else: #Busca da posição correta no meio ou fim da lista
             aux = lista_ordenada.head
-            while aux.next and aux.next.valor < novo_no.valor:
+            while aux.next and aux.next.valor < novo_no.valor: # Percorre enquanto o próximo valor for menor que o valor atual
                 aux = aux.next
-            novo_no.next = aux.next
+            #atualiza os ponteiros do elemento anterior e do que estamos inserindo
+            novo_no.next = aux.next 
             aux.next = novo_no
         
+        #avança para o próximo e atualiza o tamanho
         atual = atual.next
         lista_ordenada.tamanho += 1
     
@@ -68,7 +74,7 @@ def InsertionSort(lista_original):
     }
         
 def CarregarArquivos(lista):
-
+    '''Carrega a lista de nomes e retorna erro caso o arquivo não seja encontrado ou algum outro erro inesperado aconteça.'''
     try: 
         with open("nomes.txt", "r", encoding= "utf-8")as arquivo:
             for linha in arquivo:
@@ -82,6 +88,7 @@ def CarregarArquivos(lista):
         return {"erro": f"Erro inesperado: {str(e)}"}
 
 def obterListaOriginal(lista_original):
+    '''Retorna uma lista das palavras sem ordenação conforme foi carregada.'''
     if lista_original.isEmpty():
         return {"erro": "Os dados ainda não foram carregados ou estão vazios."}
     return {"sucesso": lista_original.toList()}
