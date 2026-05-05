@@ -20,44 +20,53 @@ class Interface(ctk.CTk):
         self.processando = False
 
         
+        
         self.criar_menu()
 
     def criar_menu(self):
+        self.botoes = []
         self.frame_menu = ctk.CTkFrame(self, fg_color="transparent")
         self.frame_menu.pack(expand=True, fill="both")
         
         # Botão 1: Carregar os Dados
         frame_1 = self.criar_frame_no_menu()
-        ctk.CTkButton(frame_1, text="1. Carregar Dados do Arquivo", 
-                      command=lambda: self.carregar_os_dados(self.statos_1)).pack(pady=(5,0))
+        bnt_1 = ctk.CTkButton(frame_1, text="1. Carregar Dados do Arquivo", 
+                      command=lambda: self.carregar_os_dados(self.statos_1))
+        bnt_1.pack(pady=(5,0))
         self.statos_1 = ctk.CTkLabel(frame_1, text="", text_color="gray") #Como esse label vai
         #ser usado para aviso, começa com "text=''" 
         self.statos_1.pack()
+        self.botoes.append(bnt_1)
             
         # Botão 2: Ordenar os Dados 
         frame_2 = self.criar_frame_no_menu()
-        ctk.CTkButton(frame_2, text="2. Ordenar Dados", 
-                      command=lambda: self.ordenar_os_dados(self.statos_2)).pack(pady=(5,0))
+        bnt_2 = ctk.CTkButton(frame_2, text="2. Ordenar Dados", 
+                      command=lambda: self.ordenar_os_dados(self.statos_2))
+        bnt_2.pack(pady=(5,0))
         self.statos_2 = ctk.CTkLabel(frame_2, text="", text_color="gray")
         self.statos_2.pack()
-        
+        self.botoes.append(bnt_2)
+
         # Botão 3: Listar Original 
         
         self.bnt_listar_sem_odernacao =  ctk.CTkButton(self.frame_menu, text="3. Listar sem Ordenação", 
                       command=self.listar_sem_ordenacao)
         self.bnt_listar_sem_odernacao.pack(pady=(10,20))
+        self.botoes.append(self.bnt_listar_sem_odernacao)
     
         # Botão 4: Listar Ordenado
         
         self.bnt_listar_com_odernacao = ctk.CTkButton(self.frame_menu, text="4. Listar Ordenados", 
                       command=self.listar_com_ordenacao)
         self.bnt_listar_com_odernacao.pack(pady=20)
+        self.botoes.append(self.bnt_listar_com_odernacao)
 
         # Botão 5: Estatísticas
         
         self.bnt_estatistica = ctk.CTkButton(self.frame_menu, text="5. Imprimir Estatísticas", 
                       command=self.imprimir_estatistica)
         self.bnt_estatistica.pack(pady=20)
+        self.botoes.append(self.bnt_estatistica)
 
 
     def criar_frame_no_menu(self):
@@ -73,6 +82,14 @@ class Interface(ctk.CTk):
     def sair_do_menu(self, novo_frame: ctk.CTkFrame):
         self.frame_menu.pack_forget()
         novo_frame.pack(expand=True, fill="both")
+
+    def travar_botoes(self):
+            for botao in self.botoes:
+                botao.configure(state="disabled")
+
+    def destravar_botoes(self):
+            for botao in self.botoes:
+                botao.configure(state="normal")
 
     def carregar_os_dados(self, label: ctk.CTkLabel):
         if self.processando:
@@ -105,7 +122,8 @@ class Interface(ctk.CTk):
             label.configure(text="Erro: Carregue o arquivo primeiro!", text_color="#ea3013")
             self.after(3000, lambda: label.configure(text=""))
             return
-        
+
+        self.travar_botoes()
         self.overlay = ctk.CTkFrame(self.frame_menu, fg_color="gray")
         self.overlay.place(relx=0, rely=0, relwidth=1, relheight=1)
 
@@ -114,6 +132,7 @@ class Interface(ctk.CTk):
        
         self.overlay.destroy()
         self.processando = False
+        self.destravar_botoes()
 
         if "sucesso" in resposta:
             self.foi_ordenado = True
@@ -131,6 +150,8 @@ class Interface(ctk.CTk):
             self.statos_1.configure(text="⚠️ Carregue os dados primeiro!", text_color="#e67e22")
             self.after(3000, lambda: self.statos_1.configure(text=""))
             return
+
+        
 
         novo_frame = ctk.CTkFrame(self, fg_color="transparent")
         ctk.CTkLabel(novo_frame, text="DADOS ORIGINAIS(20 PRIMEIROS)", font=("Arial", 18, "bold")).pack(pady=10)
