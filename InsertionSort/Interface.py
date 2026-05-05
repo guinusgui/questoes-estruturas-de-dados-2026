@@ -70,7 +70,7 @@ class Interface(ctk.CTk):
         novo_frame.pack(expand=True, fill="both")
 
     def carregar_os_dados(self, label: ctk.CTkLabel):
-        self.minha_lista=[]#Reseto a lista, para que não seja acumulado os dados
+        self.minha_lista = ListaSimples()#Reseto a lista, para que não seja acumulado os dados        
         #já anteriomento colocados
         resposta = CarregarArquivos(self.minha_lista)
 
