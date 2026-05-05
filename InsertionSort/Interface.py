@@ -29,7 +29,8 @@ class Interface(ctk.CTk):
         frame_1 = self.criar_frame_no_menu()
         ctk.CTkButton(frame_1, text="1. Carregar Dados do Arquivo", 
                       command=lambda: self.carregar_os_dados(self.statos_1)).pack(pady=(5,0))
-        self.statos_1 = ctk.CTkLabel(frame_1, text="", text_color="gray")
+        self.statos_1 = ctk.CTkLabel(frame_1, text="", text_color="gray") #Como esse label vai
+        #ser usado para aviso, começa com "text=''" 
         self.statos_1.pack()
             
         # Botão 2: Ordenar os Dados 
@@ -120,7 +121,8 @@ class Interface(ctk.CTk):
                 break
             txt_box.insert("end", f"{count}- {nome}\n")
             count +=1
-        txt_box.configure(state="disabled")
+        txt_box.configure(state="disabled")#Basicamente é para impossibilitar que o que foi escrito no "txt_box"
+        #seja alterado
 
         ctk.CTkButton(novo_frame, text="Voltar ao menu", command=lambda: self.voltar_para_menu(novo_frame)).pack(pady=10)
         self.sair_do_menu(novo_frame) # Troca a tela para voltar ao menu
