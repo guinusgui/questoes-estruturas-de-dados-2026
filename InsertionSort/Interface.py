@@ -76,15 +76,8 @@ class Interface(ctk.CTk):
     def carregar_os_dados(self, label: ctk.CTkLabel):
         self.minha_lista = ListaSimples()#Reseto a lista, para que não seja acumulado os dados        
         #já anteriomento colocados
-        self.bnt_listar_com_odernacao.configure(state="disabled")
-        self.bnt_listar_sem_odernacao.configure(state="disabled")
-        self.bnt_estatistica.configure(state="disabled")
 
         resposta = CarregarArquivos(self.minha_lista)
-
-        self.bnt_listar_com_odernacao.configure(state="normal")
-        self.bnt_listar_sem_odernacao.configure(state="normal")
-        self.bnt_estatistica.configure(state="normal")
 
         if "sucesso" in resposta:
             self.foi_carregado = True
@@ -103,8 +96,19 @@ class Interface(ctk.CTk):
             label.configure(text="Erro: Carregue o arquivo primeiro!", text_color="#ea3013")
             self.after(3000, lambda: label.configure(text=""))
             return
-
+        
+        # self.bnt_listar_com_odernacao.configure(state="disabled")
+        # self.bnt_listar_sem_odernacao.configure(state="disabled")
+        # self.bnt_estatistica.configure(state="disabled")
+        self.overlay = ctk.CTkFrame(self.frame_menu, fg_color="gray")
+        self.overlay.place(relx=0, rely=0, relwidth=1, relheight=1)
         resposta = InsertionSort(self.minha_lista)
+        self.overlay.destroy()
+
+        # self.bnt_listar_com_odernacao.configure(state="normal")
+        # self.bnt_listar_sem_odernacao.configure(state="normal")
+        # self.bnt_estatistica.configure(state="normal")
+
         if "sucesso" in resposta:
             self.foi_ordenado = True
             self.resultado_ordenacao = resposta # Salva o dicionário de estatísticas
