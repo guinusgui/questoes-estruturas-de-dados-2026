@@ -114,34 +114,34 @@ class Interface(ctk.CTk):
         self.after(3000, lambda: label.configure(text=""))#Basicamente vai esperar 3000ms(3segundos) para fazer com que 
         #o "label" volte a ter nada escrito nele
 
-
-def ordenar_os_dados(self, label: ctk.CTkLabel):
-    # 1. Bloqueio de entrada
-    if self.processando:
-        return
-
-    # 2. Configuração inicial
-    self.processando = True
-    self.travar_botoes()
-
-    # 3. Função única que encapsula o trabalho e a atualização da GUI
-    def fluxo_de_trabalho():
-        # Executa o cálculo (pesado)
-        resultado = InsertionSort(self.minha_lista)
-        
-        # Volta para a Thread Principal para atualizar a interface (obrigatório)
-        self.after(0, lambda: [
-            self.destravar_botoes(),
-            setattr(self, 'processando', False),
-            label.configure(
-                text="Ordenação concluída!" if "sucesso" in resultado else resultado["erro"],
-                text_color="#2ecc71" if "sucesso" in resultado else "#ea3013"
-            ),
-            self.after(3000, lambda: label.configure(text=""))
-        ])
-
-    # 4. Inicia a thread disparando a função interna
-    threading.Thread(target=fluxo_de_trabalho, daemon=True).start()
+    
+    def ordenar_os_dados(self, label: ctk.CTkLabel):
+        # 1. Bloqueio de entrada
+        if self.processando:
+            return
+    
+        # 2. Configuração inicial
+        self.processando = True
+        self.travar_botoes()
+    
+        # 3. Função única que encapsula o trabalho e a atualização da GUI
+        def fluxo_de_trabalho():
+            # Executa o cálculo (pesado)
+            resultado = InsertionSort(self.minha_lista)
+            
+            # Volta para a Thread Principal para atualizar a interface (obrigatório)
+            self.after(0, lambda: [
+                self.destravar_botoes(),
+                setattr(self, 'processando', False),
+                label.configure(
+                    text="Ordenação concluída!" if "sucesso" in resultado else resultado["erro"],
+                    text_color="#2ecc71" if "sucesso" in resultado else "#ea3013"
+                ),
+                self.after(3000, lambda: label.configure(text=""))
+            ])
+    
+        # 4. Inicia a thread disparando a função interna
+        threading.Thread(target=fluxo_de_trabalho, daemon=True).start()
 
     def listar_sem_ordenacao(self):
         if self.processando:
