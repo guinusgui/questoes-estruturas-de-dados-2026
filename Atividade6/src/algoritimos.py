@@ -2,7 +2,7 @@
 #Fonte: GeeksForGeeks (https://www.geeksforgeeks.org/dsa/bubble-sort-algorithm/)
 def bubble_sort(target:list[str]):
     n = len(target)
-    for i in range(n-1):
+    for i in range(n):
         swap = False
 
         for j in range(0, n - i - 1):
@@ -10,7 +10,7 @@ def bubble_sort(target:list[str]):
                 target [j], target[j+1] = target[j+1], target[j]
                 swap = True
         
-        if not swap: break
+        if (swap == False): break
 
 #Fonte: GeeksForGeeks (https://www.geeksforgeeks.org/dsa/insertion-sort-algorithm/)
 def insertion_sort(target:list[str]):
