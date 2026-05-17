@@ -22,7 +22,7 @@ def ordenar(lista: list[str], sort: Callable):
     start = time.time()
     sort(lista)
     end = time.time()
-    return {"sucesso": {sort.__name__: f"{(end - start):.4f} segundos"}}
+    return {"sucesso": f"{(end - start):.4f} segundos"}
 
 # Dicionário de funções
 dicio = {
