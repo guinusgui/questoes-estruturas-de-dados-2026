@@ -17,7 +17,7 @@ def ordenar(lista:list[str], sort:Callable):
     start = time.time()
     sort(lista)
     end = time.time()
-    return {"sucesso":{sort.__name__ : f"{(end - start):.2f}"}}
+    return {"sucesso":{sort.__name__ : f"{(end - start):.4f}"}}
 
 
 #Talvez ajude na interface
@@ -37,7 +37,7 @@ if __name__ == "__main__":
     for i in range(10):
          print(lista[i])
 
-    print(ordenar(lista, true_quick_sort))
+    print(ordenar(lista, bubble_sort))
     for i in range(10):
          print(lista[i])
 
