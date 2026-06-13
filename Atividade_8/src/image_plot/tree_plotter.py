@@ -73,7 +73,6 @@ def image_plot(bst, file: str="arvore"):
     )
 
 
-    #graph.attr(rankdir="TB")
     graph.attr("node",fontname="Arial")
 
     add_node(graph,bst.head)
@@ -93,7 +92,6 @@ def gui_plot(bst):
             "erro":"A árvore é muito grande para ser plotada"
         }
 
-    #graph.attr(rankdir="TB")
     graph.attr("node",fontname="Arial")
 
     add_node(graph,bst.head)
