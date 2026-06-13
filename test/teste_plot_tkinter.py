@@ -10,10 +10,10 @@ from Atividade_8.src.image_plot.tree_plotter import gui_plot
 
 
 arvore = BST()
-arvore.batch_put(8, 4, (3, "valor de teste"), (10, "valor de teste"), 9, 5)
+arvore.batch_put(4, (5,"valor de teste"), (3,"valor de teste"))
 
 root = CTk()
-tk_image = gui_plot(arvore)
+tk_image = gui_plot(arvore)["imagem"]
 label = CTkLabel(root, image=tk_image, text="")
 label.pack()
 

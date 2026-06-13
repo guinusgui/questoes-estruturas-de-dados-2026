@@ -82,6 +82,10 @@ def image_plot(bst, file: str="arvore"):
         cleanup=True
     )
 
+    return  {
+        "sucesso":f"{file}.png salvo com sucesso"
+    }
+
 def gui_plot(bst):
     graph = Digraph(
         format="png"
