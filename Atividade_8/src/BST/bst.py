@@ -78,7 +78,7 @@ class BST:
             
         return get_height_from_node(self.head)
 
-    def delete(self):
+    def clear(self):
         self.head = None
 
     def get_min_node(self):

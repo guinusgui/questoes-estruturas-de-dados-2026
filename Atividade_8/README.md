@@ -1,6 +1,6 @@
 # Atividade 8 - GUI para BST
 
-Esta atividade consiste na implementação de uma árvore binária para uma Árvore Binária de Busca (ABS ou BST em inglês) e de uma interface gráfica para modificá-la.
+Esta atividade consiste na implementação de uma árvore binária para uma Árvore Binária de Busca (ABB ou BST em inglês) e de uma interface gráfica para modificá-la.
 
 # Requerimentos
 ## 1. customtkinter

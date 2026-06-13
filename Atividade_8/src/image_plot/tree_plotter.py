@@ -63,9 +63,15 @@ def add_node(graph: Digraph, node):
         graph.edge(node_id, null_id, style="invis")
 
 def image_plot(bst, file: str="arvore"):
+    if bst.size >=4:
+        return {
+            "erro":"A árvore é muito grande para ser plotada"
+        }
+
     graph = Digraph(
         format="png"
     )
+
 
     #graph.attr(rankdir="TB")
     graph.attr("node",fontname="Arial")
@@ -81,6 +87,11 @@ def gui_plot(bst):
     graph = Digraph(
         format="png"
     )
+
+    if bst.size >=4:
+        return {
+            "erro":"A árvore é muito grande para ser plotada"
+        }
 
     #graph.attr(rankdir="TB")
     graph.attr("node",fontname="Arial")
