@@ -91,7 +91,7 @@ def gui_plot(bst):
         format="png"
     )
 
-    if bst.size >=4:
+    if bst.get_height() > 3:
         return {
             "erro":"A árvore é muito grande para ser plotada"
         }
