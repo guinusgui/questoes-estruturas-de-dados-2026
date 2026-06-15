@@ -10,4 +10,4 @@ Biblioteca python para criar GUI's. Pode ser instalada através do Python atrav�
 Biblioteca usada para manipular imagens. Instalável através de `pip install pillow`
 
 ## 3. graphviz
-Biblioteca python para manipulação de grafos. É necessária a instalação da biblioteca python, feita através de `pip install graphviz`, bem como do graphviz *system-wide*. Para fazê-la consulte a [documentação oficial](https://graphviz.org/) para ver o proceso para o seu sistema operacional
+Biblioteca python para manipulação de grafos. É necessária a instalação da biblioteca python, feita através de `pip install graphviz`, bem como do graphviz *system-wide*. Para fazê-la consulte a [documentação oficial](https://graphviz.org/) para ver o processo para o seu sistema operacional
